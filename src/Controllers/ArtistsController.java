@@ -9,6 +9,8 @@ import Models.Artists;
 import java.util.HashMap;
 import java.util.Map;
 import Controllers.Utils;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  *
@@ -41,5 +43,18 @@ public class ArtistsController implements BaseController<Artists>{
     @Override
     public void remove(int key) {
         artistsRecorded.remove(key);
+    }
+    
+    public Object[] getModelFields(){
+        ArrayList<String> payback = new ArrayList<>();
+        Field[] declaredFields = Artists.class.getDeclaredFields();
+        
+        for(Field field : declaredFields){
+            payback.add(field.getName());
+        }
+        
+//        System.out.println("Model Fields: "+payback.toString());
+        
+        return payback.toArray();
     }
 }
