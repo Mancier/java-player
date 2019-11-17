@@ -18,4 +18,5 @@ public interface BaseController<T> {
     public Object getByKey(int key);
     public void update(int key, T element);
     public void remove(int key);
+    public Object[] getModelFields();
 }
