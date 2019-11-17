@@ -11,6 +11,8 @@ import Controllers.PlaylistsController;
 import Controllers.SongsController;
 import Models.Artists;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -56,8 +58,16 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    private Object modelsAttribute(Object element){;
-        return element.getClass().getFields();
+    private void changeTableModel(Object[] title){
+        int count = 0;
+        for(Object mod : title){
+            title[count] = mod.toString().toUpperCase();
+            count++;
+        }
+        
+        TableModel dataModel = new DefaultTableModel(null, title);
+        
+        tableOfEveryrthing.setModel(dataModel);
     }
 
     /**
@@ -81,7 +91,7 @@ public class Main extends javax.swing.JFrame {
         playlistsTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableOfEveryrthing = new javax.swing.JTable();
         btnNewItem = new javax.swing.JButton();
         btnRemoveItem = new javax.swing.JButton();
         btnEditItem = new javax.swing.JButton();
@@ -178,18 +188,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableOfEveryrthing);
 
         btnNewItem.setText("Nova Música");
         btnNewItem.setToolTipText("");
@@ -271,6 +270,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         changeSelection(artistsFieldText);
         changeTextOnButton(btnNewItem, ("Novo Artista"));
+        changeTableModel(artistsController.getModelFields());
     }//GEN-LAST:event_btnArtistsSelectedActionPerformed
 
     private void btnNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewItemActionPerformed
@@ -337,8 +337,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JTable playlistsTable;
+    private javax.swing.JTable tableOfEveryrthing;
     // End of variables declaration//GEN-END:variables
 }
