@@ -25,3 +25,5 @@ hs_err_pid*
 #Editors path
 .idea/*
 .vscode/*
+/nbproject/private/
+/build/
