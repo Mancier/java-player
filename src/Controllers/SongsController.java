@@ -25,12 +25,12 @@ public class SongsController implements BaseController<Songs>{
     }
 
     @Override
-    public Object get() {
-        return songsRecorded.values();
+    public Songs[] get() {
+        return (Songs[]) songsRecorded.values().toArray();
     }
 
     @Override
-    public Object getByKey(int key) {
+    public Songs getByKey(int key) {
         return songsRecorded.get(key);
     }
 
@@ -45,7 +45,7 @@ public class SongsController implements BaseController<Songs>{
     }
     
     @Override
-    public Object[] getModelFields(){
+    public Songs[] getModelFields(){
         ArrayList<String> payback = new ArrayList<>();
         Field[] declaredFields = Songs.class.getDeclaredFields();
         
@@ -53,7 +53,7 @@ public class SongsController implements BaseController<Songs>{
             payback.add(field.getName());
         }
         
-        return payback.toArray();
+        return (Songs[]) payback.toArray();
     }
 
 }

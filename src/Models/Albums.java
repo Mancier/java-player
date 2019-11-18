@@ -48,4 +48,11 @@ public class Albums {
     public void setArtist(Artists artist) {
         this.artist = artist;
     }
+    
+    public Albums(String name, int releasedAt, Artists artists){
+        setName(name);
+        setReleasedAt(releasedAt);
+        setArtist(artist);
+        setMusic(null);
+    }
 }

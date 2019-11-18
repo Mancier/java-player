@@ -5,18 +5,15 @@
  */
 package Controllers;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-
 /**
  *
  * @author victor
  */
 public interface BaseController<T> {
     public void insert(T element);
-    public Object get();
-    public Object getByKey(int key);
+    public T[] get();
+    public T getByKey(int key);
     public void update(int key, T element);
     public void remove(int key);
-    public Object[] getModelFields();
+    public T[] getModelFields();
 }

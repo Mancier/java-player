@@ -26,12 +26,12 @@ public class ArtistsController implements BaseController<Artists>{
     }
 
     @Override
-    public Object get() {
-        return artistsRecorded.values();
+    public Artists[] get() {
+        return (Artists[]) artistsRecorded.values().toArray();
     }
 
     @Override
-    public Object getByKey(int key) {
+    public Artists getByKey(int key) {
         return artistsRecorded.get(key);
     }
 
@@ -45,16 +45,13 @@ public class ArtistsController implements BaseController<Artists>{
         artistsRecorded.remove(key);
     }
     
-    public Object[] getModelFields(){
+    public Artists[] getModelFields(){
         ArrayList<String> payback = new ArrayList<>();
         Field[] declaredFields = Artists.class.getDeclaredFields();
         
         for(Field field : declaredFields){
             payback.add(field.getName());
-        }
-        
-//        System.out.println("Model Fields: "+payback.toString());
-        
-        return payback.toArray();
+        }        
+        return (Artists[]) payback.toArray();
     }
 }

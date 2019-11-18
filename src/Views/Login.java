@@ -5,10 +5,8 @@
  */
 package Views;
 
-import Controllers.ArtistsController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Field;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -94,15 +92,8 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private ArtistsController artistsController = new ArtistsController();
-
     private void btnLoginActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        Field[] fields = artistsController.getClass().getDeclaredFields();
-        for (Field field : fields){
-            System.out.println(field.getName());
-        }
-        
         new Main().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed

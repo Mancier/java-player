@@ -10,6 +10,8 @@ import Controllers.ArtistsController;
 import Controllers.PlaylistsController;
 import Controllers.SongsController;
 import Models.Artists;
+import Models.Songs;
+import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -45,7 +47,6 @@ public class Main extends javax.swing.JFrame {
     }
     
     void changeSelection(String name){
-        System.out.println("Selection: "+name);
         lastSelection = name;
     }
     
@@ -58,14 +59,20 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    private void changeTableModel(Object[] title){
+    void changeTableModel(Collection<T> data, Object[] title){
         int count = 0;
         for(Object mod : title){
             title[count] = mod.toString().toUpperCase();
             count++;
         }
         
-        TableModel dataModel = new DefaultTableModel(null, title);
+        String[][] items = null;
+        
+        for(int i = 0; i < data.length; i++){
+//            items[i] = data.get
+        }        
+        
+        TableModel dataModel = new DefaultTableModel(items, title);
         
         tableOfEveryrthing.setModel(dataModel);
     }
@@ -258,19 +265,23 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         changeSelection(musicFieldText);
         changeTextOnButton(btnNewItem, ("Nova Música"));
+        
+        changeTableModel<Songs>(songsController.get(), songsController.getModelFields());
     }//GEN-LAST:event_btnMusicSelectedActionPerformed
 
     private void btnAlbumsSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbumsSelectedActionPerformed
         // TODO add your handling code here:
         changeSelection(albumsFieldText);
         changeTextOnButton(btnNewItem, ("Novo Álbum"));
+        changeTableModel<Albums>(albumsController.get(), albumsController.getModelFields());
+
     }//GEN-LAST:event_btnAlbumsSelectedActionPerformed
 
     private void btnArtistsSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArtistsSelectedActionPerformed
         // TODO add your handling code here:
         changeSelection(artistsFieldText);
         changeTextOnButton(btnNewItem, ("Novo Artista"));
-        changeTableModel(artistsController.getModelFields());
+        changeTableModel<Artists>(artistsController.get(),artistsController.getModelFields());
     }//GEN-LAST:event_btnArtistsSelectedActionPerformed
 
     private void btnNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewItemActionPerformed
@@ -278,7 +289,7 @@ public class Main extends javax.swing.JFrame {
         if (lastSelection.equals(musicFieldText)){
             
         } else if (lastSelection.equals(albumsFieldText)){
-            
+            new AlbumsForm().setVisible(true);
         } else {
            artistsController.insert(new Artists("Teste", "Bio"));
         }
